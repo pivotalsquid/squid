@@ -1,6 +1,11 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
+after 'deploy:published', 'passenger:restart'
+
+set :passenger_environment_variables, { :path => '/home/deploy/.rvm/gems/ruby-2.2.1@squid/wrappers:/opt/passenger/passenger-5.0.6/bin:$PATH' }
+set :passenger_rvm_ruby_version, 'ruby-2.2.1'
+
 set :application, 'squid'
 set :repo_url, 'git@github.com:pivotalsquid/squid.git'
 
